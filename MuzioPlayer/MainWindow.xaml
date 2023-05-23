@@ -1,0 +1,107 @@
+﻿<Window x:Class="MuzioPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuzioPlayer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+    <Window.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" ></Setter>
+                <Setter Property="FontSize" Value="13" ></Setter>
+            </Style>
+
+            <Style TargetType="TabItem">
+                <Setter Property="Foreground" Value="Gray" ></Setter>
+                <Setter Property="FontSize" Value="13" ></Setter>
+                <Setter Property="Background" Value="#191970" ></Setter>
+
+            </Style>
+        </Window.Resources>
+
+
+        <Grid Background="#191970">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition  Height="*"></RowDefinition>
+                <RowDefinition  Height="0.3*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Muzio Player" FontSize="14" />
+
+            <TabControl Grid.Row="1" Background="#191970" >
+
+                <TabItem Header="Suggested">
+                </TabItem>
+
+                <TabItem Header="Songs" Width="100">
+                    <DataGrid x:Name="dataGrid" SelectedItem="{Binding SelectedSong, Mode=TwoWay}"  PreviewMouseLeftButtonDown="dataGrid_PreviewMouseLeftButtonDown">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="*" Header="Song">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" ></TextBlock>
+                                            <TextBlock Text="{Binding Artist}"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Albums">
+                </TabItem>
+                <TabItem Header="Playlist">
+                </TabItem>
+
+
+                <TabItem Header="Add Songs">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Button x:Name="LoadSongs_btn" Grid.Row="0" Content="Load songs" Background="Gray" Margin="40" Width="200" Click="LoadSongs_btn_Click" ></Button>
+
+                        <Button   x:Name="DragSongs_btn" Grid.Row="1" Content="Drag songs here" Background="Gray" IsHitTestVisible="False"></Button>
+
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0 "  Grid.Column="0">
+                    <Image></Image>
+                    <TextBlock Text="{Binding CurrentSong.Name}" ></TextBlock>
+                    <TextBlock Text="{Binding CurrentSong.Artist}" Foreground="Gray"  ></TextBlock>
+                </StackPanel>
+
+                <Button Margin="10" Grid.Column="1" x:Name="PlayPause_btn"  HorizontalAlignment="Center" Content="⏸  ▶" Click="PlayPause_btn_Click">
+                </Button>
+                <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" ></ProgressBar>
+            </Grid>
+
+            <!--<Button Grid.Row="2" Content="Открыть панель" Click="OpenPopup_Click" />
+
+        <Popup  Grid.Row="2" x:Name="popup" IsOpen="False" PlacementTarget="{Binding ElementName=button}" Placement="Bottom">
+            <Border Background="LightGray" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <Button Content="Это всплывающая панель" Click="Button_Click" />
+            </Border>
+        </Popup>-->
+
+        
+    </Grid>
+</Window>
